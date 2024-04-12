@@ -1,6 +1,7 @@
 package com.example.OneToOneChat.domain.service;
 
 import com.example.OneToOneChat.domain.dto.Request.ChatMessageCreateRequest;
+import com.example.OneToOneChat.domain.dto.Response.ChatRoomAllResponse;
 import com.example.OneToOneChat.domain.dto.Response.ChatRoomMessageResnpose;
 import com.example.OneToOneChat.domain.entity.ChatMessage;
 import com.example.OneToOneChat.domain.entity.ChatRoom;
@@ -59,13 +60,13 @@ public class ChatMessageService {
                 .map(chatMessage -> new ChatRoomMessageResnpose(chatMessage.getWriter(), chatMessage.getContent()))
                 .collect(Collectors.toList());
     }
-    public List<ChatRoomMessageResnpose> all(){
+    public List<ChatRoomAllResponse> all(){
         List<ChatMessage> allChat = chatMessageRepository.findAll();
-        List<ChatRoomMessageResnpose> chatRoomMessageResnposes= new ArrayList<>();
+        List<ChatRoomAllResponse> chatRoomMessageResnposes= new ArrayList<>();
 
         allChat.stream().forEach(chat -> {
-            ChatRoomMessageResnpose chatRoomMessageResnpose = ChatRoomMessageResnpose.makeAll(chat);
-            chatRoomMessageResnposes.add(chatRoomMessageResnpose);
+            ChatRoomAllResponse chatRoomAllResponse = ChatRoomAllResponse.makeAll(chat);
+            chatRoomMessageResnposes.add(chatRoomAllResponse);
         });
         return chatRoomMessageResnposes;
     }

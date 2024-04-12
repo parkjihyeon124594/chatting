@@ -2,6 +2,7 @@ package com.example.OneToOneChat.domain.controller;
 
 import com.example.OneToOneChat.domain.dto.Request.ChatMessageCreateRequest;
 import com.example.OneToOneChat.domain.dto.Request.ChatRoomRequest;
+import com.example.OneToOneChat.domain.dto.Response.ChatRoomAllResponse;
 import com.example.OneToOneChat.domain.dto.Response.ChatRoomMessageResnpose;
 import com.example.OneToOneChat.domain.repository.ChatRoomRepository;
 import com.example.OneToOneChat.domain.service.ChatMessageService;
@@ -54,8 +55,8 @@ public class ChatController {
 }
 
     @GetMapping("/all")
-    public ResponseEntity<List<ChatRoomMessageResnpose>> allName(){
-        List<ChatRoomMessageResnpose> all =chatMessageService.all();
+    public ResponseEntity<List<ChatRoomAllResponse>> allName(){
+        List<ChatRoomAllResponse> all =chatMessageService.all();
         return ResponseEntity.ok().body(all);
     }
 }
