@@ -1,7 +1,7 @@
 package com.example.OneToOneChat.domain.service;
 
 import com.example.OneToOneChat.domain.dto.Request.ChatMessageCreateRequest;
-import com.example.OneToOneChat.domain.dto.Response.ChatRoomMessage;
+import com.example.OneToOneChat.domain.dto.Response.ChatRoomMessageResnpose;
 import com.example.OneToOneChat.domain.entity.ChatMessage;
 import com.example.OneToOneChat.domain.entity.ChatRoom;
 import com.example.OneToOneChat.domain.exception.ChatRoomError;
@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,7 +46,7 @@ public class ChatMessageService {
      * message ALL READ
      */
 
-    public List<ChatRoomMessage> readChatMessageByWriter(Long id) {
+    public List<ChatRoomMessageResnpose> readChatMessageByWriter(Long id) {
 
         ChatRoom findChatRoom= chatRoomRepository.findById(id)
                 .orElseThrow(() -> new GlobalException(ChatRoomError.CHAT_ROOM_NOT_FOUND));
@@ -55,9 +56,21 @@ public class ChatMessageService {
                 chatMessageRepository.findChatMessageByChatRoomId(findChatRoom);
 
         return allChatMessage.stream()
-                .map(chatMessage -> new ChatRoomMessage(chatMessage.getWriter(), chatMessage.getContent()))
+                .map(chatMessage -> new ChatRoomMessageResnpose(chatMessage.getWriter(), chatMessage.getContent()))
                 .collect(Collectors.toList());
     }
+    public List<ChatRoomMessageResnpose> all(){
+        List<ChatMessage> allChat = chatMessageRepository.findAll();
+        List<ChatRoomMessageResnpose> chatRoomMessageResnposes= new ArrayList<>();
+
+        allChat.stream().forEach(chat -> {
+            ChatRoomMessageResnpose chatRoomMessageResnpose = ChatRoomMessageResnpose.makeAll(chat);
+            chatRoomMessageResnposes.add(chatRoomMessageResnpose);
+        });
+        return chatRoomMessageResnposes;
+    }
+
+
 
 }
 

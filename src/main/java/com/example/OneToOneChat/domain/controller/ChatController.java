@@ -2,7 +2,7 @@ package com.example.OneToOneChat.domain.controller;
 
 import com.example.OneToOneChat.domain.dto.Request.ChatMessageCreateRequest;
 import com.example.OneToOneChat.domain.dto.Request.ChatRoomRequest;
-import com.example.OneToOneChat.domain.dto.Response.ChatRoomMessage;
+import com.example.OneToOneChat.domain.dto.Response.ChatRoomMessageResnpose;
 import com.example.OneToOneChat.domain.repository.ChatRoomRepository;
 import com.example.OneToOneChat.domain.service.ChatMessageService;
 import com.example.OneToOneChat.domain.service.ChatRoomSerivce;
@@ -44,12 +44,18 @@ public class ChatController {
     }
 
     @GetMapping("/{roomId}")
-    public ResponseEntity<ApiUtil.ApiSuccessResult<List<ChatRoomMessage>>> readAll(
+    public ResponseEntity<ApiUtil.ApiSuccessResult<List<ChatRoomMessageResnpose>>> readAll(
             @PathVariable(name="roomId") Long roomId
             )
     {
-        List<ChatRoomMessage> chatRoomResponse = chatMessageService.readChatMessageByWriter(roomId);
+        List<ChatRoomMessageResnpose> chatRoomResponse = chatMessageService.readChatMessageByWriter(roomId);
 
      return ResponseEntity.ok().body(ApiUtil.success(HttpStatus.OK, chatRoomResponse));
 }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<ChatRoomMessageResnpose>> allName(){
+        List<ChatRoomMessageResnpose> all =chatMessageService.all();
+        return ResponseEntity.ok().body(all);
+    }
 }

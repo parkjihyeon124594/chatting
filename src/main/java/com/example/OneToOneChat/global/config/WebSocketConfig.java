@@ -1,4 +1,3 @@
-/*
 package com.example.OneToOneChat.global.config;
 
 import org.springframework.context.annotation.Configuration;
@@ -21,4 +20,3 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         registry.setApplicationDestinationPrefixes("/app"); // prefix 정의
     }
 }
-*/

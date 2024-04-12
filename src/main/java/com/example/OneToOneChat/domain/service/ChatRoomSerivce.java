@@ -25,7 +25,7 @@ public class ChatRoomSerivce {
     @Transactional
     public Long saveChatRoom(ChatRoomRequest chatRoomRequest){
         ChatRoom chatRoom = ChatRoom.builder()
-                .chatRoomName(chatRoomRequest.chatRoomName()).build();
+                .chatRoomName(chatRoomRequest.clientName()).build();
 
         chatRoomRepository.save(chatRoom);
 
