@@ -1,4 +1,4 @@
-package com.example.OneToOneChat.domain.exception;
+package com.example.OneToOneChat.domain.chatMessage.exception;
 
 import com.example.OneToOneChat.global.exception.ErrorCode;
 import org.springframework.http.HttpStatus;

@@ -1,6 +1,6 @@
-package com.example.OneToOneChat.domain.dto.Response;
+package com.example.OneToOneChat.domain.chatRomm.dto.Response;
 
-import com.example.OneToOneChat.domain.entity.ChatMessage;
+import com.example.OneToOneChat.domain.chatRomm.entity.ChatMessage;
 import lombok.Builder;
 import lombok.Getter;
 

@@ -1,5 +1,6 @@
-package com.example.OneToOneChat.domain.entity;
+package com.example.OneToOneChat.domain.chatMessage.entity;
 
+import com.example.OneToOneChat.domain.chatRomm.entity.ChatMessage;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Builder;

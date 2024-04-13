@@ -1,10 +1,8 @@
-package com.example.OneToOneChat.domain.entity;
+package com.example.OneToOneChat.domain.chatRomm.entity;
 
+import com.example.OneToOneChat.domain.chatMessage.entity.ChatRoom;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 
 @Entity
 @Getter

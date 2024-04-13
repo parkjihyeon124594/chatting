@@ -1,13 +1,13 @@
-package com.example.OneToOneChat.domain.service;
+package com.example.OneToOneChat.domain.chatMessage.service;
 
-import com.example.OneToOneChat.domain.dto.Request.ChatMessageCreateRequest;
-import com.example.OneToOneChat.domain.dto.Response.ChatRoomAllResponse;
-import com.example.OneToOneChat.domain.dto.Response.ChatRoomMessageResnpose;
-import com.example.OneToOneChat.domain.entity.ChatMessage;
-import com.example.OneToOneChat.domain.entity.ChatRoom;
-import com.example.OneToOneChat.domain.exception.ChatRoomError;
-import com.example.OneToOneChat.domain.repository.ChatMessageRepository;
-import com.example.OneToOneChat.domain.repository.ChatRoomRepository;
+import com.example.OneToOneChat.domain.chatRomm.dto.Request.ChatMessageCreateRequest;
+import com.example.OneToOneChat.domain.chatMessage.dto.response.ChatRoomAllResponse;
+import com.example.OneToOneChat.domain.chatRomm.dto.Response.ChatRoomMessageResnpose;
+import com.example.OneToOneChat.domain.chatRomm.entity.ChatMessage;
+import com.example.OneToOneChat.domain.chatMessage.entity.ChatRoom;
+import com.example.OneToOneChat.domain.chatMessage.exception.ChatRoomError;
+import com.example.OneToOneChat.domain.chatRomm.repository.ChatMessageRepository;
+import com.example.OneToOneChat.domain.chatMessage.repository.ChatRoomRepository;
 import com.example.OneToOneChat.global.exception.GlobalException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,7 +28,7 @@ public class ChatMessageService {
      * message save
      */
     @Transactional
-    public Long saveMessage(ChatMessageCreateRequest request,Long chatRoomId){
+    public Long saveMessage(ChatMessageCreateRequest request, Long chatRoomId){
 
         ChatRoom findChatRoom= chatRoomRepository.findById(chatRoomId)
                 .orElseThrow(() -> new GlobalException(ChatRoomError.CHAT_ROOM_NOT_FOUND));
@@ -69,8 +69,6 @@ public class ChatMessageService {
             chatRoomMessageResnposes.add(chatRoomAllResponse);
         });
 
-        System.out.println("chatRoomMessageResnposes size 출력");
-        System.out.println(chatRoomMessageResnposes.size());
         return chatRoomMessageResnposes;
     }
 

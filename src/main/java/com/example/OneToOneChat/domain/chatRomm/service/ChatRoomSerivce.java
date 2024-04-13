@@ -1,10 +1,10 @@
-package com.example.OneToOneChat.domain.service;
+package com.example.OneToOneChat.domain.chatRomm.service;
 
 
-import com.example.OneToOneChat.domain.dto.Request.ChatRoomRequest;
-import com.example.OneToOneChat.domain.entity.ChatRoom;
-import com.example.OneToOneChat.domain.repository.ChatMessageRepository;
-import com.example.OneToOneChat.domain.repository.ChatRoomRepository;
+import com.example.OneToOneChat.domain.chatMessage.dto.request.ChatRoomRequest;
+import com.example.OneToOneChat.domain.chatMessage.entity.ChatRoom;
+import com.example.OneToOneChat.domain.chatRomm.repository.ChatMessageRepository;
+import com.example.OneToOneChat.domain.chatMessage.repository.ChatRoomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

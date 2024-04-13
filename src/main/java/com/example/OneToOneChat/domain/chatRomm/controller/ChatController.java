@@ -1,12 +1,12 @@
-package com.example.OneToOneChat.domain.controller;
+package com.example.OneToOneChat.domain.chatRomm.controller;
 
-import com.example.OneToOneChat.domain.dto.Request.ChatMessageCreateRequest;
-import com.example.OneToOneChat.domain.dto.Request.ChatRoomRequest;
-import com.example.OneToOneChat.domain.dto.Response.ChatRoomAllResponse;
-import com.example.OneToOneChat.domain.dto.Response.ChatRoomMessageResnpose;
-import com.example.OneToOneChat.domain.repository.ChatRoomRepository;
-import com.example.OneToOneChat.domain.service.ChatMessageService;
-import com.example.OneToOneChat.domain.service.ChatRoomSerivce;
+import com.example.OneToOneChat.domain.chatRomm.dto.Request.ChatMessageCreateRequest;
+import com.example.OneToOneChat.domain.chatMessage.dto.response.ChatRoomAllResponse;
+import com.example.OneToOneChat.domain.chatMessage.dto.request.ChatRoomRequest;
+import com.example.OneToOneChat.domain.chatRomm.dto.Response.ChatRoomMessageResnpose;
+import com.example.OneToOneChat.domain.chatMessage.repository.ChatRoomRepository;
+import com.example.OneToOneChat.domain.chatMessage.service.ChatMessageService;
+import com.example.OneToOneChat.domain.chatRomm.service.ChatRoomSerivce;
 import com.example.OneToOneChat.global.util.ApiUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -23,7 +23,6 @@ public class ChatController {
 
     private final ChatMessageService chatMessageService;
     private final ChatRoomSerivce chatRoomSerivce;
-    private final ChatRoomRepository chatRoomRepository;
 
 
 
@@ -56,10 +55,8 @@ public class ChatController {
 
     @GetMapping("/all")
     public ResponseEntity<List<ChatRoomAllResponse>> allName(){
-        System.out.println("controller test1 ");
+
         List<ChatRoomAllResponse> all =chatMessageService.all();
-        System.out.println("controller test2 ");
-        System.out.println(all.size());
 
         return ResponseEntity.ok().body(all);
     }
