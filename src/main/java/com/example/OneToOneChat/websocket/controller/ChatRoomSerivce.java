@@ -1,4 +1,4 @@
-package com.example.OneToOneChat.domain.chatRomm.service;
+package com.example.OneToOneChat.websocket.controller;
 
 
 import com.example.OneToOneChat.domain.chatMessage.dto.request.ChatRoomRequest;

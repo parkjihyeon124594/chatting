@@ -1,3 +1,4 @@
+/*
 package com.example.OneToOneChat.websocket.service;
 
 
@@ -16,3 +17,4 @@ public class WebSocketChatService {
     private static Set<Session> clients=
             Collections.synchronizedSet(new HashSet<Session>());
 }
+*/

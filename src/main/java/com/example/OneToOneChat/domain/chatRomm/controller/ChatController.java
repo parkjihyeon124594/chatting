@@ -4,9 +4,8 @@ import com.example.OneToOneChat.domain.chatRomm.dto.Request.ChatMessageCreateReq
 import com.example.OneToOneChat.domain.chatMessage.dto.response.ChatRoomAllResponse;
 import com.example.OneToOneChat.domain.chatMessage.dto.request.ChatRoomRequest;
 import com.example.OneToOneChat.domain.chatRomm.dto.Response.ChatRoomMessageResnpose;
-import com.example.OneToOneChat.domain.chatMessage.repository.ChatRoomRepository;
 import com.example.OneToOneChat.domain.chatMessage.service.ChatMessageService;
-import com.example.OneToOneChat.domain.chatRomm.service.ChatRoomSerivce;
+import com.example.OneToOneChat.websocket.controller.ChatRoomSerivce;
 import com.example.OneToOneChat.global.util.ApiUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
