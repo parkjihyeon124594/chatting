@@ -56,7 +56,11 @@ public class ChatController {
 
     @GetMapping("/all")
     public ResponseEntity<List<ChatRoomAllResponse>> allName(){
+        System.out.println("controller test1 ");
         List<ChatRoomAllResponse> all =chatMessageService.all();
+        System.out.println("controller test2 ");
+        System.out.println(all.size());
+
         return ResponseEntity.ok().body(all);
     }
 }

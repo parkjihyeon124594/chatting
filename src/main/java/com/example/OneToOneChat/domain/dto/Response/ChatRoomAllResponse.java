@@ -1,15 +1,18 @@
 package com.example.OneToOneChat.domain.dto.Response;
 
 import com.example.OneToOneChat.domain.entity.ChatMessage;
+import com.example.OneToOneChat.domain.entity.ChatRoom;
 import lombok.Builder;
 
 @Builder
-public class ChatRoomAllResponse {
-
-    private String clientName;
-    public static ChatRoomAllResponse makeAll(ChatMessage chatMessage){
+public record ChatRoomAllResponse(
+        String clientName,
+        Long id
+) {
+    public static ChatRoomAllResponse makeAll(ChatRoom chatRoom){
         return ChatRoomAllResponse.builder()
-                .clientName(chatMessage.getWriter())
+                .clientName(chatRoom.getChatRoomName())
+                .id(chatRoom.getChatRoomId())
                 .build();
     }
 }

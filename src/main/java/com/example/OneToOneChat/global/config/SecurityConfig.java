@@ -1,4 +1,3 @@
-/*
 package com.example.OneToOneChat.global.config;
 
 import lombok.RequiredArgsConstructor;
@@ -49,4 +48,3 @@ public class SecurityConfig {
         return source;
     }
 }
-*/

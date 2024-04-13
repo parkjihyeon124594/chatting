@@ -61,13 +61,16 @@ public class ChatMessageService {
                 .collect(Collectors.toList());
     }
     public List<ChatRoomAllResponse> all(){
-        List<ChatMessage> allChat = chatMessageRepository.findAll();
+        List<ChatRoom> allChat = chatRoomRepository.findAll();
         List<ChatRoomAllResponse> chatRoomMessageResnposes= new ArrayList<>();
 
         allChat.stream().forEach(chat -> {
             ChatRoomAllResponse chatRoomAllResponse = ChatRoomAllResponse.makeAll(chat);
             chatRoomMessageResnposes.add(chatRoomAllResponse);
         });
+
+        System.out.println("chatRoomMessageResnposes size 출력");
+        System.out.println(chatRoomMessageResnposes.size());
         return chatRoomMessageResnposes;
     }
 
