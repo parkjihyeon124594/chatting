@@ -59,8 +59,7 @@ public class WebSocketChatController {
      * @param session
      */
     @OnMessage
-    @MessageMapping("/{roomId}")
-    public void onMessage(String message, Session session,@DestinationVariable Long roomId) throws IOException {
+    public void onMessage(String message, Session session) throws IOException {
         log.info("receive message : {}", message);
 
         for (Session s : clients) {
@@ -73,13 +72,12 @@ public class WebSocketChatController {
 
         String writer = (String) messageMap.get("writer");
         String content = (String) messageMap.get("content");
+        Long roomId = (Long) messageMap.get("roomId");
 
         ChatMessageCreateRequest chatMessageCreateRequest = ChatMessageCreateRequest.builder()
                 .content(content)
                 .writer(writer).build();
         chatMessageService.saveMessage(chatMessageCreateRequest,roomId);
-
-
     }
 
     /**
