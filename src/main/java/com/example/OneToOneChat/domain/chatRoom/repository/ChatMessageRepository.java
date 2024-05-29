@@ -1,6 +1,6 @@
-package com.example.OneToOneChat.domain.chatRomm.repository;
+package com.example.OneToOneChat.domain.chatRoom.repository;
 
-import com.example.OneToOneChat.domain.chatRomm.entity.ChatMessage;
+import com.example.OneToOneChat.domain.chatRoom.entity.ChatMessage;
 import com.example.OneToOneChat.domain.chatMessage.entity.ChatRoom;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

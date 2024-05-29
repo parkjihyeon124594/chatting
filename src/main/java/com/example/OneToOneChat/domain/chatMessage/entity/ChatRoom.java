@@ -1,6 +1,6 @@
 package com.example.OneToOneChat.domain.chatMessage.entity;
 
-import com.example.OneToOneChat.domain.chatRomm.entity.ChatMessage;
+import com.example.OneToOneChat.domain.chatRoom.entity.ChatMessage;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -25,11 +26,14 @@ public class ChatRoom {
 
     private String chatRoomName;
 
+    private Date creationDate;
+
     @Builder
-    public ChatRoom(Long id,String chatRoomName,List<ChatMessage> chatMessageList){
+    public ChatRoom(Long id,String chatRoomName,List<ChatMessage> chatMessageList,Date creationDate){
         this.chatRoomId =id;
         this.chatRoomName=chatRoomName;
         this.chatMessageList=chatMessageList;
+        this.creationDate =creationDate;
     }
 
 

@@ -1,4 +1,4 @@
-package com.example.OneToOneChat.domain.chatRomm.dto.Request;
+package com.example.OneToOneChat.domain.chatRoom.dto.Request;
 
 import lombok.Builder;
 

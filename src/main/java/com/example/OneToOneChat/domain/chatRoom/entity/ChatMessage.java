@@ -1,4 +1,4 @@
-package com.example.OneToOneChat.domain.chatRomm.entity;
+package com.example.OneToOneChat.domain.chatRoom.entity;
 
 import com.example.OneToOneChat.domain.chatMessage.entity.ChatRoom;
 import jakarta.persistence.*;

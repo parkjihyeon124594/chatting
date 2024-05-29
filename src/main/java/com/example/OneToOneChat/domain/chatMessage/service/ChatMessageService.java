@@ -1,12 +1,12 @@
 package com.example.OneToOneChat.domain.chatMessage.service;
 
-import com.example.OneToOneChat.domain.chatRomm.dto.Request.ChatMessageCreateRequest;
+import com.example.OneToOneChat.domain.chatRoom.dto.Request.ChatMessageCreateRequest;
 import com.example.OneToOneChat.domain.chatMessage.dto.response.ChatRoomAllResponse;
-import com.example.OneToOneChat.domain.chatRomm.dto.Response.ChatRoomMessageResnpose;
-import com.example.OneToOneChat.domain.chatRomm.entity.ChatMessage;
+import com.example.OneToOneChat.domain.chatRoom.dto.Response.ChatRoomMessageResnpose;
+import com.example.OneToOneChat.domain.chatRoom.entity.ChatMessage;
 import com.example.OneToOneChat.domain.chatMessage.entity.ChatRoom;
 import com.example.OneToOneChat.domain.chatMessage.exception.ChatRoomError;
-import com.example.OneToOneChat.domain.chatRomm.repository.ChatMessageRepository;
+import com.example.OneToOneChat.domain.chatRoom.repository.ChatMessageRepository;
 import com.example.OneToOneChat.domain.chatMessage.repository.ChatRoomRepository;
 import com.example.OneToOneChat.global.exception.GlobalException;
 import lombok.RequiredArgsConstructor;
