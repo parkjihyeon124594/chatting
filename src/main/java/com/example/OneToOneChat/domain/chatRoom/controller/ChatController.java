@@ -1,5 +1,6 @@
 package com.example.OneToOneChat.domain.chatRoom.controller;
 
+import com.example.OneToOneChat.domain.chatMessage.repository.ChatRoomRepository;
 import com.example.OneToOneChat.domain.chatRoom.dto.Request.ChatMessageCreateRequest;
 import com.example.OneToOneChat.domain.chatMessage.dto.response.ChatRoomAllResponse;
 import com.example.OneToOneChat.domain.chatMessage.dto.request.ChatRoomRequest;
@@ -24,6 +25,7 @@ public class ChatController {
 
     private final ChatMessageService chatMessageService;
     private final ChatRoomSerivce chatRoomSerivce;
+    private final ChatRoomRepository chatRoomRepository;
 
     @PostMapping("/room")
     public ResponseEntity<ApiUtil.ApiSuccessResult<Long>> createChatRoom(
@@ -62,10 +64,17 @@ public class ChatController {
         return ResponseEntity.ok().body(all);
     }
 
-    @GetMapping("/todayChat")
+/*    @GetMapping("/todayChatNum")
     public ResponseEntity<Long> todayChat(){
         Long todayChat = chatRoomSerivce.readTodayChatRoom();
 
         return ResponseEntity.ok().body(todayChat);
     }
+
+    @GetMapping("/AllChatNum")
+    public ResponseEntity<Long> AllChat(){
+        Long AllChatNum = (long) chatRoomRepository.findAll().size();
+
+        return ResponseEntity.ok().body(AllChatNum);
+    }*/
 }

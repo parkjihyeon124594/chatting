@@ -38,7 +38,8 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowedHeaders(Collections.singletonList("*"));
         config.setAllowedMethods(Collections.singletonList("*"));
-        config.setAllowedOriginPatterns(Collections.singletonList("http://localhost:3000")); // ⭐️ 허용할 origin
+        //config.setAllowedOriginPatterns(Collections.singletonList("http://34.64.160.97:3000")); // ⭐️ 허용할 origin
+        config.setAllowedOriginPatterns(Collections.singletonList("http://localhost:3000"));
         config.setAllowCredentials(true);
 
         config.setMaxAge(3600L); //1시간

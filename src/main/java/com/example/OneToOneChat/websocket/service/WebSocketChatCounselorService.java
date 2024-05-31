@@ -20,7 +20,7 @@ import java.util.*;
 public class WebSocketChatCounselorService {
 
     private final ChatMessageService chatMessageService;
-    private static int currentChatRoom = 0;
+
     private static List<Session> clients = Collections.synchronizedList(new ArrayList<Session>());
     private static List<Session> counselor = Collections.synchronizedList(new ArrayList<Session>());
 
@@ -32,9 +32,6 @@ public class WebSocketChatCounselorService {
         return counselor;
     }
 
-    public void setChatMessageService(int chatRoom) {
-        currentChatRoom = chatRoom;
-    }
 
     //1.세션이란?
     //http 요청을 보냈을 때, 응답을 받고 끝내는 것이 아니라 요청을 보낸 순간부터 웹 브라우저를 종료할 떄까지 연결을 유지하는 것
@@ -71,37 +68,14 @@ public class WebSocketChatCounselorService {
     public void onOpen(Session session) {
         counselor.add(session);
 
-/*        try {
-            sendSessionCountToAllClients();
-
-            if (!clients.contains(session)) {
-                clients.add(session);
-                log.info("session open : {}", session);
-            } else {
-                log.info("이미 연결된 session");
-            }
-            log.info("open session : {}, clients={}", session.toString(), clients);
-            log.info("현재 접속 중인 세션의 size{}", clients.size());
-        } catch (IOException e) {
-            log.error("Error in onOpen: {}", e.getMessage());
-            try {
-                session.close(new CloseReason(CloseReason.CloseCodes.UNEXPECTED_CONDITION, "Error during WebSocket open"));
-            } catch (IOException ex) {
-                log.error("Error closing session: {}", ex.getMessage());
-            }
-        }*/
     }
 
     @OnMessage
     public void onMessage(String message, Session session) throws IOException {
 
-        log.info("counselor onMessage {}", message, session.getId());
-
+        log.info("counselor onMessage {}", message);
+        sendMessageToClient(message);
         try {
-            for (Session s : clients) {
-                log.info("send data : {}", message);
-                s.getBasicRemote().sendText(message);
-            }
 
             // JSON 파서를 사용하여 객체 해석
             Map<String, Object> messageMap = new ObjectMapper().readValue(message, Map.class);
@@ -123,6 +97,16 @@ public class WebSocketChatCounselorService {
                 session.close(new CloseReason(CloseReason.CloseCodes.UNEXPECTED_CONDITION, "Error processing message"));
             } catch (IOException ex) {
                 log.error("Error closing session: {}", ex.getMessage());
+            }
+        }
+    }
+
+    private void sendMessageToClient(String message) throws IOException {
+
+        // 모든 클라이언트에게 JSON 객체 전송
+        for (Session s : clients) {
+            if (s.isOpen()) { // 세션이 열려있는지 확인
+                s.getBasicRemote().sendText(new ObjectMapper().writeValueAsString(message));
             }
         }
     }

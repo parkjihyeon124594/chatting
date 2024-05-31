@@ -1,7 +1,9 @@
 package com.example.OneToOneChat.websocket.service;
 
+import com.example.OneToOneChat.domain.chatMessage.repository.ChatRoomRepository;
 import com.example.OneToOneChat.domain.chatMessage.service.ChatMessageService;
 import com.example.OneToOneChat.domain.chatRoom.dto.Request.ChatMessageCreateRequest;
+import com.example.OneToOneChat.domain.chatRoom.service.ChatRoomSerivce;
 import com.example.OneToOneChat.global.config.ServerEndpointConfigurator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.annotation.PostConstruct;
@@ -25,6 +27,8 @@ public class WebSocketChatClientSerivce {
 
     private final WebSocketChatCounselorService webSocketChatCounselorService;
     private final ChatMessageService chatMessageService;
+    private final ChatRoomRepository chatRoomRepository;
+    private final ChatRoomSerivce chatRoomSerivce;
     
     private static int currentChatRoom = 0;
     private List<Session> clients;
@@ -55,16 +59,16 @@ public class WebSocketChatClientSerivce {
         // 새로운 세션을 추가하고 currentChatRoom을 증가시킴
         clients.add(session);
         currentChatRoom++;
-        webSocketChatCounselorService.setChatMessageService(currentChatRoom);
+       // webSocketChatCounselorService.setChatMessageService(currentChatRoom);
         sendSessionToCounselorChatRoomId();
 
         log.info("client 현재 세션의 수: {}", clients.size());
     }
 
     @OnMessage
-    public void onMessage(String message, Session session) {
+    public void onMessage(String message, Session session) throws IOException {
         log.info("Client onMessage {}", message);
-
+        sendMessageToCounselor(message);
 
         try {
 
@@ -75,6 +79,7 @@ public class WebSocketChatClientSerivce {
             String content = (String) messageMap.get("content");
 
             Object chatRoomIdObj = messageMap.get("chatRoomId");
+
             Long roomId = null;
 
             if (chatRoomIdObj instanceof Map) {
@@ -85,6 +90,7 @@ public class WebSocketChatClientSerivce {
                 // chatRoomId가 정수일 경우 바로 넣어줌
                 roomId = ((Integer) chatRoomIdObj).longValue();
             }
+
             ChatMessageCreateRequest chatMessageCreateRequest = ChatMessageCreateRequest.builder()
                     .content(content)
                     .writer(writer).build();
@@ -110,9 +116,25 @@ public class WebSocketChatClientSerivce {
 
 
     private void sendSessionToCounselorChatRoomId() throws IOException {
+
+        Long allChatNum = (long) chatRoomRepository.findAll().size();
+        Long todayChatNum = chatRoomSerivce.readTodayChatRoom();
+
         Map<String, Object> message = new HashMap<>();
-        message.put("type", "chatRoomId"); // 메시지 타입 추가
+        message.put("type", "chatRoomId");
         message.put("chatRoomId", currentChatRoom);
+        message.put("allChatNum", allChatNum);
+        message.put("todayChatNum", todayChatNum);
+
+        // 모든 클라이언트에게 JSON 객체 전송
+        for (Session s : counselor) {
+            if (s.isOpen()) { // 세션이 열려있는지 확인
+                s.getBasicRemote().sendText(new ObjectMapper().writeValueAsString(message));
+            }
+        }
+    }
+
+    private void sendMessageToCounselor(String message) throws IOException {
 
         // 모든 클라이언트에게 JSON 객체 전송
         for (Session s : counselor) {
